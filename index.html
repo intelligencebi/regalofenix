@@ -1,434 +1,655 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Día de la Madre - Regalo especial FÉNIX</title>
-
-  <!-- Fuentes -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calendario de Adviento - Casino Fénix</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600&family=Teko:wght@500;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    *{margin:0;padding:0;box-sizing:border-box}
-    html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-
-    :root{
-      --primary:#FF8C42; --primary-dark:#E67A2E; --secondary:#FFB366; --accent:#FFD700;
-      --dark:#1A1A1A; --dark-soft:#2A2A2A; --cream:#FFF8F0; --white:#FFFFFF;
-
-      --ff-body:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      --ff-display:'Cinzel', serif;
-      --ff-ui:'Teko', sans-serif;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    body{
-      font-family:var(--ff-body);
-      background:linear-gradient(135deg,var(--dark) 0%,var(--dark-soft) 50%,#3A2A1A 100%);
-      min-height:100vh;color:var(--cream);overflow-x:hidden;position:relative;
-      letter-spacing:.1px; line-height:1.6;
-    }
-    body::before{
-      content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
-      background:
-        radial-gradient(circle at 20% 30%, rgba(255,140,66,.10) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255,179,102,.08) 0%, transparent 50%);
-    }
-
-    /* Preloader */
-    #preloader{
-      position:fixed; inset:0; z-index:9999;
-      display:flex; flex-direction:column; align-items:center; justify-content:center;
-      background:linear-gradient(135deg,var(--dark) 0%, var(--dark-soft) 100%);
-      transition:opacity .5s ease, visibility .5s ease;
-    }
-    #preloader.hidden{opacity:0;visibility:hidden}
-    #logo{width:200px;max-width:80vw;height:auto;animation:logoFloat 2.5s ease-in-out infinite;filter:drop-shadow(0 10px 30px rgba(255,140,66,.3))}
-    @keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-    .loading-progress{margin-top:30px;width:280px;max-width:80vw}
-    .progress-bar-container{width:100%;height:4px;background:rgba(255,140,66,.2);border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.3)}
-    .progress-bar-fill{height:100%;background:linear-gradient(90deg,var(--primary),var(--secondary),var(--accent));background-size:200% 100%;width:0%;border-radius:10px;transition:width .1s linear;animation:shimmer 1.5s infinite;box-shadow:0 0 10px rgba(255,140,66,.5)}
-    @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-    .progress-text{margin-top:10px;font-size:.85rem;color:var(--secondary);text-align:center;letter-spacing:.5px}
-
-    /* Layout */
-    .container{
-      position:relative; z-index:1; min-height:100vh;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1a0e0e 0%, #2d1810 50%, #1a0e0e 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .header-section{
-      text-align:center; margin-bottom:72px; animation:fadeInDown 1s ease;
-      max-width:960px; margin-left:auto; margin-right:auto;
-    }
-    @keyframes fadeInDown{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}
-
-    .event-badge{
-      display:inline-block; padding:8px 18px; border-radius:999px;
-      background:linear-gradient(135deg,var(--primary),var(--secondary));
-      font-family:var(--ff-ui); font-size:clamp(.8rem,2.2vw,.95rem); line-height:1; letter-spacing:.4px; color:var(--white);
-      margin-bottom:18px; box-shadow:0 4px 20px rgba(255,140,66,.3);
-      text-transform:uppercase;
-    }
-
-    h1{
-      font-family:var(--ff-display); font-weight:700; line-height:1.12;
-      font-size:clamp(2.2rem,5vw,3.6rem); margin-bottom:14px; letter-spacing:.2px;
-      background:linear-gradient(135deg,var(--accent),var(--secondary));
-      -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
-      text-transform:none;
-    }
-    .subtitle{
-      max-width:620px; margin:0 auto;
-      color:rgba(255,248,240,.92); font-size:clamp(1rem,2.2vw,1.1rem);
+    /* Partículas de fondo */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        radial-gradient(2px 2px at 20% 30%, rgba(255, 165, 0, 0.3), transparent),
+        radial-gradient(2px 2px at 60% 70%, rgba(255, 140, 0, 0.3), transparent),
+        radial-gradient(1px 1px at 50% 50%, rgba(255, 215, 0, 0.2), transparent);
+      background-size: 200px 200px, 300px 300px, 250px 250px;
+      animation: particles 20s linear infinite;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    /* Gift */
-    .gift-wrapper{
-      animation:fadeInUp 1s ease .25s both; margin-top:12px;
-      width:100%;
-      display:grid;
-      place-items:center;
-    }
-    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-
-    .gift-container{
-      perspective:1000px;
-      width:100%; max-width:100%;
-      display:flex; justify-content:center; align-items:center; text-align:center;
+    @keyframes particles {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-100px); }
     }
 
-    .gift-box{
-      width:clamp(200px,40vw,280px); height:clamp(200px,40vw,280px);
-      background:linear-gradient(135deg,var(--primary) 0%,var(--primary-dark) 100%);
-      border-radius:22px; display:flex; flex-direction:column; justify-content:center; align-items:center;
-      cursor:pointer; transition:all .35s cubic-bezier(.4,0,.2,1); margin-top:24px;
-      margin-left:auto; margin-right:auto;
-      box-shadow:
-        0 22px 62px rgba(255,140,66,.42),
-        0 0 0 1px rgba(255,215,0,.18),
-        inset 0 1px 0 rgba(255,255,255,.12),
-        0 0 35px rgba(255,174,0,.25);
-    }
-    .gift-box:hover{transform:translateY(-6px) scale(1.015);box-shadow:0 28px 72px rgba(255,140,66,.5),0 0 0 1px rgba(255,215,0,.28),inset 0 1px 0 rgba(255,255,255,.2)}
-    /* 👉 ahora sigue siendo clickeable luego de abrirse */
-    .gift-box.opened{animation:giftOpen .8s cubic-bezier(.68,-.55,.265,1.55);transform-origin:center}
-    @keyframes giftOpen{0%{transform:scale(1) rotateY(0)}50%{transform:scale(1.08) rotateY(180deg)}100%{transform:scale(.96) rotateY(360deg)}}
-    .gift-icon{font-size:clamp(4rem,12vw,6rem);margin-bottom:8px;animation:giftFloat 3s ease-in-out infinite}
-    @keyframes giftFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-10px) rotate(5deg)}}
-
-    .gift-label{
-      font-family:var(--ff-display); font-weight:700;
-      font-size:clamp(1.1rem,2.4vw,1.35rem); letter-spacing:.3px; color:#fff;
-      text-shadow:0 2px 10px rgba(0,0,0,.35);
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
     }
 
-    .instruction-text{
-      margin-top:26px; font-family:var(--ff-ui); letter-spacing:.3px;
-      font-size:clamp(1rem,2.2vw,1.15rem); color:var(--secondary);
-      text-align:center; font-weight:600; animation:pulse 2s ease-in-out infinite; text-transform:none;
-      cursor:pointer; /* para que se note que es clickeable al reabrir */
+    .logo {
+      max-width: 180px;
+      height: auto;
+      margin-bottom: 15px;
+      filter: drop-shadow(0 4px 12px rgba(255, 140, 0, 0.5));
     }
-    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+
+    h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff8c00, #ffd700, #ff8c00);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 3s ease-in-out infinite;
+      text-shadow: 0 0 30px rgba(255, 140, 0, 0.5);
+      margin-bottom: 10px;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .subtitle {
+      color: #ffd700;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 600;
+      text-shadow: 0 2px 10px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Contenedor del árbol */
+    .tree-container {
+      position: relative;
+      max-width: 600px;
+      width: 100%;
+      margin: 0 auto;
+      z-index: 1;
+    }
+
+    /* Árbol SVG */
+    .tree-svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Contenedor de cajitas */
+    .boxes-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    /* Cajita individual */
+    .box {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      pointer-events: all;
+      transform-origin: center;
+    }
+
+    .box:hover:not(.locked) {
+      transform: scale(1.15) rotate(5deg);
+    }
+
+    .box.locked {
+      cursor: not-allowed;
+      opacity: 0.5;
+      filter: grayscale(70%);
+    }
+
+    .box.claimed {
+      opacity: 0.6;
+      filter: brightness(0.7);
+    }
+
+    .box-inner {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+      border: 3px solid #ffd700;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .box.locked .box-inner {
+      background: linear-gradient(135deg, #4a3428 0%, #2d1f18 100%);
+      border-color: #6b5344;
+    }
+
+    .box.claimed .box-inner {
+      background: linear-gradient(135deg, #8b6914 0%, #6b5414 100%);
+    }
+
+    .box-number {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+
+    .box.locked .box-number {
+      color: #8b7355;
+    }
+
+    .box-icon {
+      font-size: 1.2rem;
+      position: absolute;
+      bottom: 5px;
+      opacity: 0.6;
+    }
+
+    /* Shine effect */
+    .box:not(.locked):not(.claimed) .box-inner::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+      100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+    }
+
+    /* Posiciones de las cajitas en el árbol */
+    .box[data-day="1"] { top: 8%; left: 50%; transform: translateX(-50%); }
+    .box[data-day="2"] { top: 17%; left: 38%; }
+    .box[data-day="3"] { top: 17%; left: 62%; }
+    .box[data-day="4"] { top: 27%; left: 28%; }
+    .box[data-day="5"] { top: 27%; left: 50%; transform: translateX(-50%); }
+    .box[data-day="6"] { top: 27%; left: 72%; }
+    .box[data-day="7"] { top: 38%; left: 18%; }
+    .box[data-day="8"] { top: 38%; left: 34%; }
+    .box[data-day="9"] { top: 38%; left: 50%; transform: translateX(-50%); }
+    .box[data-day="10"] { top: 38%; left: 66%; }
+    .box[data-day="11"] { top: 38%; left: 82%; }
+    .box[data-day="12"] { top: 50%; left: 12%; }
+    .box[data-day="13"] { top: 50%; left: 26%; }
+    .box[data-day="14"] { top: 50%; left: 40%; }
+    .box[data-day="15"] { top: 50%; left: 54%; }
+    .box[data-day="16"] { top: 50%; left: 68%; }
+    .box[data-day="17"] { top: 50%; left: 82%; }
+    .box[data-day="18"] { top: 63%; left: 8%; }
+    .box[data-day="19"] { top: 63%; left: 20%; }
+    .box[data-day="20"] { top: 63%; left: 32%; }
+    .box[data-day="21"] { top: 63%; left: 44%; }
+    .box[data-day="22"] { top: 63%; left: 56%; }
+    .box[data-day="23"] { top: 63%; left: 68%; }
+    .box[data-day="24"] { top: 63%; left: 80%; }
+    .box[data-day="25"] { top: 88%; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; }
 
     /* Modal */
-    .result-modal{position:fixed;inset:0;background:rgba(0,0,0,.85);backdrop-filter:blur(10px);display:none;align-items:center;justify-content:center;z-index:1000;padding:20px;animation:fadeIn .3s ease}
-    .result-modal.show{display:flex}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-    .modal-content{
-      background:linear-gradient(135deg,var(--dark-soft) 0%,var(--dark) 100%);
-      border-radius:22px;padding:clamp(28px,6vw,46px);max-width:500px;width:100%;text-align:center;position:relative;
-      border:1.5px solid var(--primary);
-      box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 0 1px rgba(255,140,66,.25),inset 0 1px 0 rgba(255,255,255,.06);
-      animation:modalIn .5s cubic-bezier(.68,-.55,.265,1.55)
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(5px);
+      animation: fadeIn 0.3s ease;
     }
-    @keyframes modalIn{from{opacity:0;transform:scale(.85) translateY(40px)}to{opacity:1;transform:scale(1) translateY(0)}}
-    .modal-datetime{font-size:.85rem;color:var(--secondary);margin-bottom:12px;letter-spacing:.2px}
-    .modal-title{
-      font-family:var(--ff-display);font-weight:700;
-      font-size:clamp(1.7rem,5vw,2.4rem);
-      background:linear-gradient(135deg,var(--accent),var(--secondary));
-      -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
-      margin-bottom:14px
-    }
-    .prize-display{
-      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-      border-radius:14px;padding:clamp(22px,5vw,34px);margin:18px 0;
-      box-shadow:0 10px 40px rgba(255,140,66,.3),inset 0 1px 0 rgba(255,255,255,.1)
-    }
-    .prize-text{
-      font-family:var(--ff-ui);letter-spacing:.4px; text-transform:none;
-      font-size:clamp(1.5rem,4.5vw,2rem);font-weight:600;color:var(--white)
-    }
-    .prize-description{font-size:.95rem;color:rgba(255,248,240,.9);margin-top:10px}
 
-    .modal-button{
-      background:linear-gradient(135deg,var(--primary),var(--primary-dark)); color:var(--white); border:none;
-      padding:14px 40px; font-size:1rem; font-weight:700; border-radius:999px; cursor:pointer; margin-top:18px;
-      transition:transform .2s ease, box-shadow .2s ease; letter-spacing:.2px; box-shadow:0 10px 30px rgba(255,140,66,.4);
-      font-family:var(--ff-ui); text-transform:uppercase;
+    .modal.active {
+      display: flex;
     }
-    .modal-button:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(255,140,66,.5)}
-    .modal-button:active{transform:translateY(0)}
 
-    /* ===== Confetti ===== */
-    #confetti{
-      position:fixed; inset:0; overflow:hidden; pointer-events:none;
-      z-index:2147483647;
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-    .confetti-piece{
-      position:absolute;
-      top:-10vh; left:0;
-      width:10px; height:10px; background:var(--accent);
-      border-radius:2px;
-      will-change:top,left,transform,opacity;
-      animation:
-        fall var(--t,3s) linear var(--delay,0s) forwards,
-        sway var(--tsway,2s) ease-in-out var(--delay,0s) infinite alternate,
-        spin var(--tspin,1.6s) linear var(--delay,0s) infinite;
-      opacity:.95;
-    }
-    @keyframes fall { to { top:110vh; opacity:0; } }
-    @keyframes sway {
-      from { left: calc(var(--x,50) * 1vw - var(--amp,3vw)); }
-      to   { left: calc(var(--x,50) * 1vw + var(--amp,3vw)); }
-    }
-    @keyframes spin { from { transform:rotate(0deg) } to { transform:rotate(720deg) } }
 
-    /* Botón de sonido */
-    .sound-toggle{
-      position:fixed; right:14px; bottom:14px; z-index:2147483647;
-      background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-      color:#fff; border:none; border-radius:999px; padding:10px 14px;
-      font-family:var(--ff-ui); font-weight:700; letter-spacing:.3px;
-      box-shadow:0 8px 22px rgba(255,140,66,.45); cursor:pointer; display:none;
+    .modal-content {
+      background: linear-gradient(135deg, #2d1810 0%, #1a0e0e 100%);
+      border: 3px solid #ff8c00;
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 20px 60px rgba(255, 140, 0, 0.4);
+      animation: modalBounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    .sound-toggle.show{display:inline-flex; align-items:center; gap:8px}
-    .sound-toggle:active{transform:translateY(1px)}
-    .sound-toggle svg{width:18px;height:18px}
-    .sound-hint{position:fixed; bottom:58px; right:14px; font-size:.8rem; color:var(--secondary); opacity:.9}
 
-    @media (prefers-reduced-motion:reduce){
-      #logo,.header-section,.gift-box,.gift-icon,.modal-content{animation:none !important; transition:none !important;}
-      .confetti-piece{
-        animation:
-          fall var(--t,3s) linear var(--delay,0s) forwards,
-          sway var(--tsway,2s) ease-in-out var(--delay,0s) infinite alternate,
-          spin var(--tspin,1.6s) linear var(--delay,0s) infinite !important;
+    @keyframes modalBounce {
+      0% { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+      50% { transform: scale(1.05) rotate(2deg); }
+      100% { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: rgba(255, 140, 0, 0.2);
+      border: 2px solid #ff8c00;
+      color: #ffd700;
+      font-size: 1.5rem;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: #ff8c00;
+      transform: rotate(90deg);
+    }
+
+    .modal-day {
+      font-size: 1.2rem;
+      color: #ffd700;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    .modal-prize {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ff8c00, #ffd700);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 20px 0;
+      text-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+    }
+
+    .modal-message {
+      color: #fff;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-top: 15px;
+    }
+
+    /* Confetti */
+    .confetti {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
       }
     }
 
-    @media (max-width:768px){.header-section{margin-bottom:44px}.modal-content{margin:18px}}
-    @media (max-width:480px){.container{padding:14px}.gift-box{border-radius:20px}.modal-content{border-radius:18px;padding:26px 18px}}
+    /* Footer */
+    .footer {
+      position: relative;
+      z-index: 1;
+      margin-top: 30px;
+      text-align: center;
+      color: #ffd700;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .box {
+        width: 40px;
+        height: 40px;
+      }
+
+      .box[data-day="25"] {
+        width: 50px;
+        height: 50px;
+      }
+
+      .box-number {
+        font-size: 1.1rem;
+      }
+
+      .box-icon {
+        font-size: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .box {
+        width: 32px;
+        height: 32px;
+      }
+
+      .box[data-day="25"] {
+        width: 40px;
+        height: 40px;
+      }
+
+      .box-number {
+        font-size: 0.9rem;
+      }
+
+      .box-icon {
+        font-size: 0.8rem;
+        bottom: 2px;
+      }
+
+      .modal-content {
+        padding: 30px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Preloader -->
-  <div id="preloader" aria-hidden="true">
-    <img src="assets/logo.png" id="logo" alt="Casino Fénix">
-    <div class="loading-progress">
-      <div class="progress-bar-container"><div class="progress-bar-fill" id="progressBar"></div></div>
-      <div class="progress-text" id="progressText">0%</div>
-    </div>
+
+  <div class="header">
+    <img src="assets/logo.png" alt="Casino Fénix" class="logo" id="logo">
+    <h1>🎄 Calendario de Adviento 🎄</h1>
+    <p class="subtitle">¡Reclama tu premio diario hasta Navidad!</p>
   </div>
 
-  <!-- Main -->
-  <div class="container">
-    <div class="header-section" role="banner">
-      <div class="event-badge">Día de la Madre 2025</div>
-      <h1>Un regalo especial para mamá</h1>
-      <p class="subtitle">Celebramos a las madres con premios exclusivos. Descubrí tu sorpresa especial.</p>
-    </div>
+  <div class="tree-container">
+    <!-- Árbol de Navidad SVG -->
+    <svg class="tree-svg" viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg">
+      <!-- Cuerpo del árbol -->
+      <path d="M150 20 L110 80 L130 80 L90 140 L115 140 L75 200 L110 200 L60 270 L115 270 L50 350 L250 350 L185 270 L240 270 L190 200 L225 200 L185 140 L210 140 L170 80 L190 80 Z" 
+            fill="#2d3e2d" 
+            stroke="#1a2a1a" 
+            stroke-width="2"/>
+      
+      <!-- Tronco -->
+      <rect x="130" y="350" width="40" height="30" 
+            fill="#4a3428" 
+            stroke="#2d1f18" 
+            stroke-width="2"/>
+      
+      <!-- Estrella en la punta -->
+      <path d="M150 5 L155 18 L169 18 L158 26 L163 39 L150 31 L137 39 L142 26 L131 18 L145 18 Z" 
+            fill="#ffd700" 
+            stroke="#ff8c00" 
+            stroke-width="1.5"/>
+    </svg>
 
-    <div class="gift-wrapper">
-      <div class="gift-container">
-        <div class="gift-box" id="giftBox" aria-label="Abrir regalo">
-          <div class="gift-icon" aria-hidden="true">🎁</div>
-          <div class="gift-label">Tu regalo</div>
-        </div>
-      </div>
-      <div class="instruction-text" id="instructionText">Tocá el regalo para descubrir tu premio</div>
-    </div>
+    <!-- Contenedor de cajitas -->
+    <div class="boxes-container" id="boxesContainer"></div>
   </div>
 
-  <!-- Modal -->
-  <div class="result-modal" id="resultModal" aria-modal="true" role="dialog">
+  <div class="footer">
+    <p>Casino Fénix - Calendario de Adviento 2024</p>
+  </div>
+
+  <!-- Modal de premio -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalPrize">
     <div class="modal-content">
-      <div class="modal-datetime" id="datetime"></div>
-      <h2 class="modal-title">¡Felicitaciones!</h2>
-      <div class="prize-display"><div class="prize-text" id="premioText"></div></div>
-      <p class="prize-description">Tu premio ha sido acreditado. ¡Disfrutá de este regalo especial del Día de la Madre!</p>
-      <button class="modal-button" onclick="cerrarModal()">Aceptar</button>
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">&times;</button>
+      <div class="modal-day" id="modalDay"></div>
+      <div class="modal-prize" id="modalPrize"></div>
+      <div class="modal-message" id="modalMessage"></div>
     </div>
   </div>
 
-  <!-- Capa de confeti -->
-  <div id="confetti"></div>
-
-  <!-- Audio -->
-  <audio id="audio" src="assets/sound.mp3" preload="auto" playsinline></audio>
-
-  <!-- Toggle sonido (autoplay fallback) -->
-  <button id="soundToggle" class="sound-toggle" type="button" aria-label="Activar sonido">
-    <svg viewBox="0 0 24 24" fill="none"><path d="M3 10v4h4l5 4V6L7 10H3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
-    Activar sonido
-  </button>
-  <div id="soundHint" class="sound-hint" style="display:none;">Toque para habilitar audio</div>
+  <audio id="audio" src="assets/sound.mp3" preload="auto"></audio>
 
   <script>
-    /* ===== Probabilidades ponderadas ===== */
-    const PREMIOS = [
-      { label:"💸 10.000 FICHAS GRATIS", weight:0.5  },
-      { label:"🎉 3.000 FICHAS GRATIS",   weight:2.0  },
-      { label:"🔥 BONO DEL 200%",        weight:20.0 },
-      { label:"💥 BONO DEL 150%",        weight:35.0 },
-      { label:"🎁 BONO DEL 100%",        weight:42.5 },
+    // Sistema de premios ponderados
+    const premios = [
+      { valor: '10,000 Fichas', peso: 0.5, tipo: 'fichas' },
+      { valor: '5,000 Fichas', peso: 2, tipo: 'fichas' },
+      { valor: '2,500 Fichas', peso: 5, tipo: 'fichas' },
+      { valor: '1,000 Fichas', peso: 10, tipo: 'fichas' },
+      { valor: '500 Fichas', peso: 15, tipo: 'fichas' },
+      { valor: 'Bono del 200%', peso: 5, tipo: 'bono' },
+      { valor: 'Bono del 150%', peso: 10, tipo: 'bono' },
+      { valor: 'Bono del 100%', peso: 42.5, tipo: 'bono' },
+      { valor: '50 Giros Gratis', peso: 10, tipo: 'giros' }
     ];
-    function pickWeighted(items){
-      const total = items.reduce((a,b)=>a+b.weight,0);
-      let r = Math.random()*total;
-      for(const it of items){ if((r -= it.weight) <= 0) return it.label; }
-      return items[items.length-1].label;
+
+    function pickWeighted(items) {
+      const totalWeight = items.reduce((sum, item) => sum + item.peso, 0);
+      let random = Math.random() * totalWeight;
+      for (const item of items) {
+        random -= item.peso;
+        if (random <= 0) return item;
+      }
+      return items[items.length - 1];
     }
 
-    /* ===== Elementos ===== */
-    const giftBox=document.getElementById("giftBox");
-    const resultModal=document.getElementById("resultModal");
-    const premioText=document.getElementById("premioText");
-    const instructionText=document.getElementById("instructionText");
-    const preloader=document.getElementById("preloader");
-    const progressBar=document.getElementById("progressBar");
-    const progressText=document.getElementById("progressText");
-    const confettiLayer=document.getElementById("confetti");
-    const audio=document.getElementById("audio");
-    const soundToggle=document.getElementById("soundToggle");
-    const soundHint=document.getElementById("soundHint");
+    // Obtener día actual (para pruebas, puedes cambiar esto)
+    function getCurrentDay() {
+      const now = new Date();
+      // Para pruebas, descomenta la siguiente línea para simular un día específico
+      // return 15; // Simula que estamos en el día 15
+      
+      // Solo en diciembre
+      if (now.getMonth() === 11) { // Diciembre es mes 11 (0-indexed)
+        return now.getDate();
+      }
+      
+      // Para pruebas fuera de diciembre, retorna un día simulado
+      return 1; // Cambia esto para probar diferentes días
+    }
 
-    /* ===== Audio: autoplay con fallback ===== */
-    audio.loop = true;
-    async function tryAutoPlay(){
-      try{
-        await audio.play();
-        soundToggle.classList.remove('show');
-        soundHint.style.display='none';
-      }catch(err){
-        soundToggle.classList.add('show');
-        soundHint.style.display='block';
-        const unlock = async () => {
-          try{
-            await audio.play();
-            soundToggle.classList.remove('show');
-            soundHint.style.display='none';
-            window.removeEventListener('pointerdown', unlock);
-            window.removeEventListener('keydown', unlock);
-          }catch(e){}
-        };
-        soundToggle.addEventListener('click', unlock, { once:true });
-        window.addEventListener('pointerdown', unlock, { once:true });
-        window.addEventListener('keydown', unlock, { once:true });
+    // LocalStorage para premios reclamados
+    const STORAGE_KEY = 'advent_calendar_claims';
+
+    function getClaimedDays() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : {};
+    }
+
+    function saveClaim(day, prize) {
+      const claims = getClaimedDays();
+      claims[day] = {
+        prize: prize,
+        timestamp: new Date().toISOString()
+      };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(claims));
+    }
+
+    function isDayClaimed(day) {
+      const claims = getClaimedDays();
+      return claims.hasOwnProperty(day);
+    }
+
+    function getClaimedPrize(day) {
+      const claims = getClaimedDays();
+      return claims[day]?.prize || null;
+    }
+
+    // Crear cajitas
+    function createBoxes() {
+      const container = document.getElementById('boxesContainer');
+      const currentDay = getCurrentDay();
+
+      for (let day = 1; day <= 25; day++) {
+        const box = document.createElement('div');
+        box.className = 'box';
+        box.setAttribute('data-day', day);
+        
+        const isLocked = day > currentDay;
+        const isClaimed = isDayClaimed(day);
+        
+        if (isLocked) {
+          box.classList.add('locked');
+        }
+        
+        if (isClaimed) {
+          box.classList.add('claimed');
+        }
+
+        box.innerHTML = `
+          <div class="box-inner">
+            <div class="box-number">${day}</div>
+            <div class="box-icon">${isClaimed ? '✓' : (isLocked ? '🔒' : '🎁')}</div>
+          </div>
+        `;
+
+        if (!isLocked) {
+          box.addEventListener('click', () => openBox(day));
+        }
+
+        container.appendChild(box);
       }
     }
 
-    /* ===== Preloader ===== */
-    window.addEventListener('load',function(){
-      let p=0; const i=setInterval(()=>{
-        p+=Math.random()*15+5;
-        if(p>=100){p=100;clearInterval(i);setTimeout(()=>preloader.classList.add('hidden'),300);}
-        progressBar.style.width=p+'%';progressText.textContent=Math.floor(p)+'%';
-      },100);
-      tryAutoPlay();
-    });
+    // Abrir cajita
+    function openBox(day) {
+      const claimed = isDayClaimed(day);
+      let prize;
 
-    /* ===== Estado previo ===== */
-    if(localStorage.getItem("premioFenix")){
-      giftBox.classList.add("opened");
-      instructionText.textContent="Ya reclamaste tu premio • Tocá el regalo para verlo de nuevo";
-      instructionText.style.opacity="0.85";
-    }
-
-    /* ===== Interacción caja ===== */
-    giftBox.addEventListener("click",()=>{
-      const previo=localStorage.getItem("premioFenix");
-      if(previo){
-        mostrarPremio(previo);
-        lanzarConfetti();
-        return;
+      if (claimed) {
+        // Mostrar premio ya reclamado
+        prize = getClaimedPrize(day);
+      } else {
+        // Generar nuevo premio
+        const selectedPrize = pickWeighted(premios);
+        prize = selectedPrize.valor;
+        saveClaim(day, prize);
+        
+        // Marcar como reclamado visualmente
+        const box = document.querySelector(`.box[data-day="${day}"]`);
+        box.classList.add('claimed');
+        box.querySelector('.box-icon').textContent = '✓';
+        
+        // Confetti
+        launchConfetti();
+        
+        // Audio
+        playAudio();
       }
-      const premio = pickWeighted(PREMIOS);
-      localStorage.setItem("premioFenix",premio);
-      giftBox.classList.add("opened");
-      instructionText.style.opacity="0";
-      setTimeout(()=>{mostrarPremio(premio);lanzarConfetti();},800);
+
+      showModal(day, prize, claimed);
+    }
+
+    // Modal
+    function showModal(day, prize, alreadyClaimed) {
+      const modal = document.getElementById('modal');
+      const modalDay = document.getElementById('modalDay');
+      const modalPrize = document.getElementById('modalPrize');
+      const modalMessage = document.getElementById('modalMessage');
+
+      modalDay.textContent = `Día ${day} de Diciembre`;
+      modalPrize.textContent = prize;
+      
+      if (alreadyClaimed) {
+        modalMessage.innerHTML = '¡Ya reclamaste este premio!<br>Vuelve mañana por uno nuevo.';
+      } else {
+        modalMessage.innerHTML = '🎉 ¡Felicidades! 🎉<br>Tu premio ha sido agregado a tu cuenta.';
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('active');
+    }
+
+    document.getElementById('modalClose').addEventListener('click', closeModal);
+    document.getElementById('modal').addEventListener('click', (e) => {
+      if (e.target.id === 'modal') closeModal();
     });
 
-    /* 👉 también permitimos reabrir tocando el texto */
-    instructionText.addEventListener('click',()=>{
-      const g = localStorage.getItem('premioFenix');
-      if(g) mostrarPremio(g);
-    });
-
-    /* ===== Modal ===== */
-    function mostrarPremio(p){
-      window.scrollTo(0,0);
-      const ahora=new Date();
-      const opt={year:'numeric',month:'long',day:'numeric',hour:'2-digit',minute:'2-digit'};
-      document.getElementById("datetime").textContent=ahora.toLocaleDateString('es-AR',opt);
-      premioText.textContent=p;
-      resultModal.classList.add('show');
-    }
-    function cerrarModal(){
-      resultModal.classList.remove('show');
-      instructionText.textContent="Ya reclamaste tu premio • Tocá el regalo para verlo de nuevo";
-      instructionText.style.opacity="0.85";
-    }
-    resultModal.addEventListener('click',(e)=>{if(e.target===resultModal)cerrarModal();});
-
-    /* ===== Confeti ===== */
-    function lanzarConfetti(){
-      confettiLayer.innerHTML='';
-      const colors=['#FFD700','#FF8C42','#FFB366','#FFF8F0','#E67A2E'];
-      const total=120;
-      for(let i=0;i<total;i++){
-        const c=document.createElement("div");
-        c.className="confetti-piece";
-        const x=Math.random()*100;
-        const amp=(Math.random()*6+2)+'vw';
-        const size=(Math.random()*8+6);
-        const t=(Math.random()*1.5+2.5)+'s';
-        const tsway=(Math.random()*1.5+1.6)+'s';
-        const tspin=(Math.random()*1.2+1)+'s';
-        const delay=(Math.random()*0.7)+'s';
-
-        c.style.setProperty('--x', x);
-        c.style.setProperty('--amp', amp);
-        c.style.setProperty('--t', t);
-        c.style.setProperty('--tsway', tsway);
-        c.style.setProperty('--tspin', tspin);
-        c.style.setProperty('--delay', delay);
-
-        c.style.width=size+'px';
-        c.style.height=size+'px';
-        c.style.background=colors[Math.floor(Math.random()*colors.length)];
-
-        confettiLayer.appendChild(c);
-        setTimeout(()=>c.remove(), 6000);
+    // Confetti
+    function launchConfetti() {
+      const colors = ['#ff8c00', '#ffd700', '#ff6b00', '#ffed4e', '#ff4500'];
+      for (let i = 0; i < 100; i++) {
+        setTimeout(() => {
+          const confetti = document.createElement('div');
+          confetti.className = 'confetti';
+          confetti.style.left = Math.random() * 100 + 'vw';
+          confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+          confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          confetti.style.animationDelay = (Math.random() * 0.5) + 's';
+          document.body.appendChild(confetti);
+          
+          setTimeout(() => confetti.remove(), 5000);
+        }, i * 30);
       }
     }
 
-    /* ===== Reset por teclado (R) (opcional) ===== */
-    function resetPremio(){
-      localStorage.removeItem("premioFenix");
-      giftBox.classList.remove("opened");
-      instructionText.textContent="Tocá el regalo para descubrir tu premio";
-      instructionText.style.opacity="1";
-      alert("Premio reiniciado. Podés volver a reclamarlo.");
+    // Audio
+    function playAudio() {
+      const audio = document.getElementById('audio');
+      audio.play().catch(() => {
+        console.log('[v0] Audio autoplay blocked');
+      });
     }
-    document.addEventListener('keydown',(e)=>{
-      if(e.key.toLowerCase()==='r'){
-        if(confirm("¿Reiniciar el premio?")) resetPremio();
+
+    // Reset para pruebas (presiona R)
+    document.addEventListener('keydown', (e) => {
+      if (e.key.toLowerCase() === 'r') {
+        if (confirm('¿Reiniciar calendario? (Solo para pruebas)')) {
+          localStorage.removeItem(STORAGE_KEY);
+          location.reload();
+        }
       }
     });
+
+    // Inicializar
+    createBoxes();
+
+    console.log('[v0] Advent Calendar initialized. Current day:', getCurrentDay());
   </script>
+
 </body>
 </html>
