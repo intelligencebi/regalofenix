@@ -27,6 +27,77 @@
       position: relative;
     }
 
+    /* Added preloader styles */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a0e0e 0%, #2d1810 50%, #1a0e0e 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .preloader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .preloader-logo {
+      max-width: 200px;
+      margin-bottom: 40px;
+      animation: pulse 2s ease-in-out infinite;
+      filter: drop-shadow(0 0 20px rgba(255, 140, 0, 0.6));
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    .progress-bar-container {
+      width: 300px;
+      height: 8px;
+      background: rgba(255, 140, 0, 0.2);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 0 20px rgba(255, 140, 0, 0.3);
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #ff8c00, #ffd700, #ff8c00);
+      background-size: 200% 100%;
+      border-radius: 10px;
+      width: 0%;
+      animation: loadProgress 2s ease-out forwards, shimmerBar 1.5s linear infinite;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+    }
+
+    @keyframes loadProgress {
+      0% { width: 0%; }
+      100% { width: 100%; }
+    }
+
+    @keyframes shimmerBar {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      color: #ffd700;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+
     /* Partículas de fondo */
     body::before {
       content: '';
@@ -92,13 +163,13 @@
     /* Contenedor del árbol */
     .tree-container {
       position: relative;
-      max-width: 600px;
+      max-width: 700px;
       width: 100%;
       margin: 0 auto;
       z-index: 1;
     }
 
-    /* Árbol SVG */
+    /* Updated tree SVG for better proportions */
     .tree-svg {
       width: 100%;
       height: auto;
@@ -118,8 +189,8 @@
     /* Cajita individual */
     .box {
       position: absolute;
-      width: 50px;
-      height: 50px;
+      width: 55px;
+      height: 55px;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
       pointer-events: all;
@@ -201,32 +272,45 @@
       100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
 
-    /* Posiciones de las cajitas en el árbol */
-    .box[data-day="1"] { top: 8%; left: 50%; transform: translateX(-50%); }
-    .box[data-day="2"] { top: 17%; left: 38%; }
-    .box[data-day="3"] { top: 17%; left: 62%; }
-    .box[data-day="4"] { top: 27%; left: 28%; }
-    .box[data-day="5"] { top: 27%; left: 50%; transform: translateX(-50%); }
-    .box[data-day="6"] { top: 27%; left: 72%; }
-    .box[data-day="7"] { top: 38%; left: 18%; }
-    .box[data-day="8"] { top: 38%; left: 34%; }
-    .box[data-day="9"] { top: 38%; left: 50%; transform: translateX(-50%); }
-    .box[data-day="10"] { top: 38%; left: 66%; }
-    .box[data-day="11"] { top: 38%; left: 82%; }
-    .box[data-day="12"] { top: 50%; left: 12%; }
-    .box[data-day="13"] { top: 50%; left: 26%; }
-    .box[data-day="14"] { top: 50%; left: 40%; }
-    .box[data-day="15"] { top: 50%; left: 54%; }
-    .box[data-day="16"] { top: 50%; left: 68%; }
-    .box[data-day="17"] { top: 50%; left: 82%; }
-    .box[data-day="18"] { top: 63%; left: 8%; }
-    .box[data-day="19"] { top: 63%; left: 20%; }
-    .box[data-day="20"] { top: 63%; left: 32%; }
-    .box[data-day="21"] { top: 63%; left: 44%; }
-    .box[data-day="22"] { top: 63%; left: 56%; }
-    .box[data-day="23"] { top: 63%; left: 68%; }
-    .box[data-day="24"] { top: 63%; left: 80%; }
-    .box[data-day="25"] { top: 88%; left: 50%; transform: translateX(-50%); width: 60px; height: 60px; }
+    /* Updated box positions to match reference images - organized in pyramid rows */
+    /* Row 1: 1 box */
+    .box[data-day="1"] { top: 5%; left: 50%; transform: translateX(-50%); }
+    
+    /* Row 2: 2 boxes */
+    .box[data-day="2"] { top: 14%; left: 42%; }
+    .box[data-day="3"] { top: 14%; left: 58%; }
+    
+    /* Row 3: 3 boxes */
+    .box[data-day="4"] { top: 23%; left: 34%; }
+    .box[data-day="5"] { top: 23%; left: 50%; transform: translateX(-50%); }
+    .box[data-day="6"] { top: 23%; left: 66%; }
+    
+    /* Row 4: 5 boxes */
+    .box[data-day="7"] { top: 33%; left: 22%; }
+    .box[data-day="8"] { top: 33%; left: 34%; }
+    .box[data-day="9"] { top: 33%; left: 50%; transform: translateX(-50%); }
+    .box[data-day="10"] { top: 33%; left: 66%; }
+    .box[data-day="11"] { top: 33%; left: 78%; }
+    
+    /* Row 5: 6 boxes */
+    .box[data-day="12"] { top: 45%; left: 16%; }
+    .box[data-day="13"] { top: 45%; left: 28%; }
+    .box[data-day="14"] { top: 45%; left: 40%; }
+    .box[data-day="15"] { top: 45%; left: 60%; }
+    .box[data-day="16"] { top: 45%; left: 72%; }
+    .box[data-day="17"] { top: 45%; left: 84%; }
+    
+    /* Row 6: 7 boxes */
+    .box[data-day="18"] { top: 60%; left: 11%; }
+    .box[data-day="19"] { top: 60%; left: 22%; }
+    .box[data-day="20"] { top: 60%; left: 33%; }
+    .box[data-day="21"] { top: 60%; left: 44%; }
+    .box[data-day="22"] { top: 60%; left: 56%; }
+    .box[data-day="23"] { top: 60%; left: 67%; }
+    .box[data-day="24"] { top: 60%; left: 78%; }
+    
+    /* Row 7: 1 box (trunk/star position) */
+    .box[data-day="25"] { top: 85%; left: 50%; transform: translateX(-50%); width: 65px; height: 65px; }
 
     /* Modal */
     .modal {
@@ -355,17 +439,17 @@
     /* Responsive */
     @media (max-width: 768px) {
       .box {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
       }
 
       .box[data-day="25"] {
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
       }
 
       .box-number {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
       }
 
       .box-icon {
@@ -375,17 +459,17 @@
 
     @media (max-width: 480px) {
       .box {
-        width: 32px;
-        height: 32px;
+        width: 35px;
+        height: 35px;
       }
 
       .box[data-day="25"] {
-        width: 40px;
-        height: 40px;
+        width: 45px;
+        height: 45px;
       }
 
       .box-number {
-        font-size: 0.9rem;
+        font-size: 1rem;
       }
 
       .box-icon {
@@ -396,14 +480,31 @@
       .modal-content {
         padding: 30px 20px;
       }
+
+      .preloader-logo {
+        max-width: 150px;
+      }
+
+      .progress-bar-container {
+        width: 250px;
+      }
     }
   </style>
 </head>
 <body>
 
+  <!-- Added preloader -->
+  <div class="preloader" id="preloader">
+    <img src="assets/logo.png" alt="Casino Fénix" class="preloader-logo">
+    <div class="progress-bar-container">
+      <div class="progress-bar"></div>
+    </div>
+    <div class="loading-text">Cargando calendario...</div>
+  </div>
+
   <div class="header">
     <img src="assets/logo.png" alt="Casino Fénix" class="logo" id="logo">
-    <h1>🎄 Calendario de Adviento 🎄</h1>
+    <h1>Calendario de Adviento</h1>
     <p class="subtitle">¡Reclama tu premio diario hasta Navidad!</p>
   </div>
 
@@ -450,6 +551,12 @@
   <audio id="audio" src="assets/sound.mp3" preload="auto"></audio>
 
   <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+      }, 2100);
+    });
+
     // Sistema de premios ponderados
     const premios = [
       { valor: '10,000 Fichas', peso: 0.5, tipo: 'fichas' },
@@ -593,7 +700,7 @@
       if (alreadyClaimed) {
         modalMessage.innerHTML = '¡Ya reclamaste este premio!<br>Vuelve mañana por uno nuevo.';
       } else {
-        modalMessage.innerHTML = '🎉 ¡Felicidades! 🎉<br>Tu premio ha sido agregado a tu cuenta.';
+        modalMessage.innerHTML = '¡Felicidades!<br>Tu premio ha sido agregado a tu cuenta.';
       }
 
       modal.classList.add('active');
@@ -647,8 +754,6 @@
 
     // Inicializar
     createBoxes();
-
-    console.log('[v0] Advent Calendar initialized. Current day:', getCurrentDay());
   </script>
 
 </body>
